@@ -1,0 +1,6 @@
+framework module Pods_AccountManager_AccountManagerUITests {
+  umbrella header "Pods-AccountManager-AccountManagerUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
