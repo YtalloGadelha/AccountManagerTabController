@@ -42,13 +42,11 @@ class MainIncomeViewController: DefaultViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //self.viewModel.listExpense()
         self.viewModel.listIncome()
         self.showActivity()
         
         guard let tabBar = tabBarController?.tabBar else { return }
         tabBar.tintColor = .systemGreen
-        //tabBar.selectionIndicatorImage = UIImage().makeImageWithColorAndSize(.systemGreen, size: CGSizeMake(tabBar.frame.width/5, tabBar.frame.height))
         
     }
     

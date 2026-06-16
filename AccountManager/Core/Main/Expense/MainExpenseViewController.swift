@@ -43,7 +43,6 @@ class MainExpenseViewController: DefaultViewController{
         super.viewWillAppear(animated)
         
         self.viewModel.listExpense()
-        //self.viewModel.listIncome()
         self.showActivity()
         
         guard let tabBar = tabBarController?.tabBar else { return }

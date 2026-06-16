@@ -22,15 +22,11 @@ class MyTableExpenseViewCell: UITableViewCell {
         dateFormatter.dateFormat = "dd/MM/yyyy"
     
         self.valueLabel.text = "Valor: \(viewModel.value)"
-        self.valueLabel.textColor = .systemRed
         
         self.dateLabel.text = "Data: \(dateFormatter.string(from: viewModel.date ?? Date()))"
-        self.dateLabel.textColor = .systemRed
         
         self.descriptionLabel.text = "Descrição: \(viewModel.description)"
-        self.descriptionLabel.textColor = .systemRed
         
-        self.paidLabel.textColor = .systemRed
         if(viewModel.paid){
             self.paidLabel.text = "Pago: Sim."
         }else{
