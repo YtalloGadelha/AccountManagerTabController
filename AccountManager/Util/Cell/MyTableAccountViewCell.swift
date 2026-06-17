@@ -7,16 +7,16 @@
 
 import UIKit
 
-class MyTableIncomeViewCell: UITableViewCell {
+class MyTableAccountViewCell: UITableViewCell {
     
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var paidLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var viewModel: MyTableIncomeViewCellViewModel?
+    var viewModel: MyTableAccountViewCellViewModel?
     
-    func setupCell(viewModel: MyTableIncomeViewCellViewModel){
+    func setupCell(viewModel: MyTableAccountViewCellViewModel){
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"

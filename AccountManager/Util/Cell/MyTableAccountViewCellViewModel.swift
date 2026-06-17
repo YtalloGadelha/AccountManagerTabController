@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MyTableIncomeViewCellViewModel{
+class MyTableAccountViewCellViewModel {
     
     private var model: AccountModel
     
@@ -28,8 +28,8 @@ class MyTableIncomeViewCellViewModel{
         return self.model.paid
     }
     
-    init(incomeModel: AccountModel) {
-        self.model = incomeModel
+    init(accountModel: AccountModel) {
+        self.model = accountModel
     }
     
 }

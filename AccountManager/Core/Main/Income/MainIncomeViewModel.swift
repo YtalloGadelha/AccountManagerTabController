@@ -17,8 +17,7 @@ class MainIncomeViewModel {
     
     private var data: [AccountModel] = []
     let authBusinessModel: LoginProtocol
-    let expenseBusinessModel: ExpenseRepositoryProtocol
-    let incomeBusinessModel: IncomeRepositoryProtocol
+    let incomeBusinessModel: AccountRepositoryProtocol
     weak var delegate: MainIncomeViewModelDelegate?
     
     var tableViewNumberOfLines: Int {
@@ -26,11 +25,9 @@ class MainIncomeViewModel {
     }
     
     init(authBusinessModel: LoginProtocol = LoginBusinessModel(),
-         expenseBusinessModel: ExpenseRepositoryProtocol = ExpenseBusinessModel(),
-         incomeBusinessModel: IncomeRepositoryProtocol = IncomeBusinessModel()) {
+         incomeBusinessModel: AccountRepositoryProtocol = IncomeBusinessModel()) {
         
         self.authBusinessModel = authBusinessModel
-        self.expenseBusinessModel = expenseBusinessModel
         self.incomeBusinessModel = incomeBusinessModel
         
     }
@@ -40,7 +37,7 @@ class MainIncomeViewModel {
         self.authBusinessModel.fetchCoreDataLoggedUser()
         self.authBusinessModel.logout { [weak self] result in
             switch result{
-            
+                
             case .success():
                 self?.delegate?.didSignout()
             case .failure(let error):
@@ -50,7 +47,7 @@ class MainIncomeViewModel {
         }
     }
     
-    func getTableExpenseViewCellViewModel(from indexPath: IndexPath) -> MyTableExpenseViewCellViewModel? {
+    func getTableViewCellViewModel(from indexPath: IndexPath) -> MyTableAccountViewCellViewModel? {
         
         if(indexPath.row > data.count){
             return nil
@@ -58,19 +55,7 @@ class MainIncomeViewModel {
         
         let model = data[indexPath.row]
         
-        return MyTableExpenseViewCellViewModel(expenseModel: model)
-        
-    }
-    
-    func getTableIncomeViewCellViewModel(from indexPath: IndexPath) -> MyTableIncomeViewCellViewModel? {
-        
-        if(indexPath.row > data.count){
-            return nil
-        }
-        
-        let model = data[indexPath.row]
-        
-        return MyTableIncomeViewCellViewModel(incomeModel: model)
+        return MyTableAccountViewCellViewModel(accountModel: model)
         
     }
     
@@ -83,60 +68,14 @@ class MainIncomeViewModel {
     }
     
     func deleteData(from indexPath: IndexPath) {
-        data.remove(at: indexPath.row)        
-    }
-    
-    func listExpense() {
-        self.expenseBusinessModel.list { [weak self] result in
-            
-            switch result{
-            
-            case .success(let objects):
-                
-                for object in objects {
-                    
-                    if let hasObject = self?.data.contains(where: { $0.documentID == object.documentID }), !hasObject {
-                        self?.data.append(object)
-                    }
-                    
-                    if let indice = self?.data.firstIndex(where: { $0.documentID == object.documentID }) {
-                        
-                        self?.data[indice].value = object.value;
-                        self?.data[indice].description = object.description;
-                        self?.data[indice].date = object.date;
-                        self?.data[indice].paid = object.paid
-                        
-                    }
-                                        
-                }
-                
-                self?.delegate?.didFinishWithSuccess()
-            case .failure(let error):
-                self?.delegate?.didFail(message: error.getMessage())
-                
-            }
-        }
-    }
-    
-    func deleteExpense(object: AccountModel) {
-        
-        self.expenseBusinessModel.delete(object: object) { [weak self] result in
-            
-            switch result{
-            
-            case .success():
-                self?.delegate?.didFinishWithSuccess()
-            case .failure(let error):
-                self?.delegate?.didFail(message: error.getMessage())
-            }
-        }
+        data.remove(at: indexPath.row)
     }
     
     func listIncome() {
         self.incomeBusinessModel.list { [weak self] result in
             
             switch result{
-            
+                
             case .success(let objects):
                 
                 for object in objects {
@@ -153,7 +92,7 @@ class MainIncomeViewModel {
                         self?.data[indice].paid = object.paid
                         
                     }
-                                        
+                    
                 }
                 
                 self?.delegate?.didFinishWithSuccess()
@@ -169,7 +108,7 @@ class MainIncomeViewModel {
         self.incomeBusinessModel.delete(object: object) { [weak self] result in
             
             switch result{
-            
+                
             case .success():
                 self?.delegate?.didFinishWithSuccess()
             case .failure(let error):

@@ -14,10 +14,10 @@ protocol IncomeViewModelDelegate: AnyObject {
 
 class IncomeViewModel {
     
-    let incomeBusinessModel: IncomeRepositoryProtocol
+    let incomeBusinessModel: AccountRepositoryProtocol
     weak var delegate: IncomeViewModelDelegate?
     
-    init(incomeBusinessModel: IncomeRepositoryProtocol = IncomeBusinessModel()) {
+    init(incomeBusinessModel: AccountRepositoryProtocol = IncomeBusinessModel()) {
         self.incomeBusinessModel = incomeBusinessModel
     }
     

@@ -16,7 +16,7 @@ class MainIncomeViewController: DefaultViewController{
     
     var viewModel: MainIncomeViewModel = MainIncomeViewModel()
     
-    func configLayout() {        
+    func configLayout() {
         self.addIncomeButton.clipsToBounds = true
         self.addIncomeButton.layer.cornerRadius = 12.0
         self.addIncomeButton.layer.borderColor = UIColor.lightGray.cgColor
@@ -47,15 +47,6 @@ class MainIncomeViewController: DefaultViewController{
         
         guard let tabBar = tabBarController?.tabBar else { return }
         tabBar.tintColor = .systemGreen
-        
-    }
-    
-    @IBAction func expenseAddButton(_ sender: Any) {
-        
-        let story = UIStoryboard.init(name: "Expense", bundle: nil)
-        if let vc = story.instantiateInitialViewController(){
-            self.present(vc, animated: true, completion: nil)
-        }
         
     }
     
@@ -103,20 +94,9 @@ extension MainIncomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let selectedData = self.viewModel.getData(from: indexPath), selectedData.isIncome,
-           let cell = tableView.dequeueReusableCell(withIdentifier: "myIncomeCell") as? MyTableIncomeViewCell{
+           let cell = tableView.dequeueReusableCell(withIdentifier: "myAccountCell") as? MyTableAccountViewCell{
             
-            if let myTableViewCellViewModel = self.viewModel.getTableIncomeViewCellViewModel(from: indexPath){
-                cell.setupCell(viewModel: myTableViewCellViewModel)
-            }
-            
-            return cell
-            
-        }
-        
-        if let selectedData = self.viewModel.getData(from: indexPath), selectedData.isExpense,
-           let cell = tableView.dequeueReusableCell(withIdentifier: "myExpenseCell") as? MyTableExpenseViewCell{
-            
-            if let myTableViewCellViewModel = self.viewModel.getTableExpenseViewCellViewModel(from: indexPath){
+            if let myTableViewCellViewModel = self.viewModel.getTableViewCellViewModel(from: indexPath){
                 cell.setupCell(viewModel: myTableViewCellViewModel)
             }
             
@@ -136,18 +116,6 @@ extension MainIncomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: false)
         
-        if let selectedData = self.viewModel.getData(from: indexPath), selectedData.isExpense{
-            
-            let story = UIStoryboard.init(name: "Expense", bundle: nil)
-            if let vc = story.instantiateInitialViewController() as? ExpenseViewController{
-                
-                vc.expense = selectedData
-                self.present(vc, animated: true, completion: nil)
-                
-            }
-            
-        }
-        
         if let selectedData = self.viewModel.getData(from: indexPath), selectedData.isIncome{
             
             let story = UIStoryboard.init(name: "Income", bundle: nil)
@@ -165,16 +133,6 @@ extension MainIncomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            
-            if let selectedData = self.viewModel.getData(from: indexPath), selectedData.isExpense{
-                
-                self.viewModel.deleteExpense(object: selectedData)
-                self.viewModel.deleteData(from: indexPath)
-                self.viewModel.listExpense()
-                
-                return
-                
-            }
             
             if let selectedData = self.viewModel.getData(from: indexPath), selectedData.isIncome{
                 

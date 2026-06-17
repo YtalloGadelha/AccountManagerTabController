@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-class ExpenseBusinessModel: ExpenseRepositoryProtocol {
+class ExpenseBusinessModel: AccountRepositoryProtocol {
     func list(completion: @escaping (Result<[AccountModel], AccountManagerError>) -> Void) {
         
         let db = Firestore.firestore()

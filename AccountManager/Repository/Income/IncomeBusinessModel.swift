@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-class IncomeBusinessModel: IncomeRepositoryProtocol {
+class IncomeBusinessModel: AccountRepositoryProtocol {
     
     func list(completion: @escaping (Result<[AccountModel], AccountManagerError>) -> Void) {
         

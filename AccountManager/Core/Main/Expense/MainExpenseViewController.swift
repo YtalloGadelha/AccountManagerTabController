@@ -91,21 +91,10 @@ extension MainExpenseViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let selectedData = self.viewModel.getData(from: indexPath), selectedData.isIncome,
-           let cell = tableView.dequeueReusableCell(withIdentifier: "myIncomeCell") as? MyTableIncomeViewCell{
-            
-            if let myTableViewCellViewModel = self.viewModel.getTableIncomeViewCellViewModel(from: indexPath){
-                cell.setupCell(viewModel: myTableViewCellViewModel)
-            }
-            
-            return cell
-            
-        }
-        
         if let selectedData = self.viewModel.getData(from: indexPath), selectedData.isExpense,
-           let cell = tableView.dequeueReusableCell(withIdentifier: "myExpenseCell") as? MyTableExpenseViewCell{
+           let cell = tableView.dequeueReusableCell(withIdentifier: "myAccountCell") as? MyTableAccountViewCell{
             
-            if let myTableViewCellViewModel = self.viewModel.getTableExpenseViewCellViewModel(from: indexPath){
+            if let myTableViewCellViewModel = self.viewModel.getTableViewCellViewModel(from: indexPath){
                 cell.setupCell(viewModel: myTableViewCellViewModel)
             }
             
@@ -137,18 +126,6 @@ extension MainExpenseViewController: UITableViewDelegate, UITableViewDataSource 
             
         }
         
-        if let selectedData = self.viewModel.getData(from: indexPath), selectedData.isIncome{
-            
-            let story = UIStoryboard.init(name: "Income", bundle: nil)
-            if let vc = story.instantiateInitialViewController() as? IncomeViewController{
-                
-                vc.income = selectedData
-                self.present(vc, animated: true, completion: nil)
-                
-            }
-            
-        }
-        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -160,16 +137,6 @@ extension MainExpenseViewController: UITableViewDelegate, UITableViewDataSource 
                 self.viewModel.deleteExpense(object: selectedData)
                 self.viewModel.deleteData(from: indexPath)
                 self.viewModel.listExpense()
-                
-                return
-                
-            }
-            
-            if let selectedData = self.viewModel.getData(from: indexPath), selectedData.isIncome{
-                
-                self.viewModel.deleteIncome(object: selectedData)
-                self.viewModel.deleteData(from: indexPath)
-                self.viewModel.listIncome()
                 
                 return
                 

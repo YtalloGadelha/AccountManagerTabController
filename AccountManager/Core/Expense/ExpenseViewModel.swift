@@ -14,10 +14,10 @@ protocol ExpenseViewModelDelegate: AnyObject {
 
 class ExpenseViewModel {
     
-    let expenseBusinessModel: ExpenseRepositoryProtocol
+    let expenseBusinessModel: AccountRepositoryProtocol
     weak var delegate: ExpenseViewModelDelegate?
     
-    init(expenseBusinessModel: ExpenseRepositoryProtocol = ExpenseBusinessModel()) {
+    init(expenseBusinessModel: AccountRepositoryProtocol = ExpenseBusinessModel()) {
         self.expenseBusinessModel = expenseBusinessModel
     }
     
