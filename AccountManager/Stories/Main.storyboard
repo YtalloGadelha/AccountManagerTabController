@@ -151,8 +151,10 @@
                             <constraint firstItem="d89-Tl-Flt" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="fZQ-3P-tJc"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="arrow.down.right" catalog="system" landscapeImage="dollarsign" badgeValue="Despesa" id="NxI-Qq-LhL">
-                        <color key="badgeColor" systemColor="systemRedColor"/>
+                    <tabBarItem key="tabBarItem" title="" id="NxI-Qq-LhL">
+                        <imageReference key="image" image="arrow.down.right" catalog="system" renderingMode="original" variableValue="1"/>
+                        <color key="badgeColor" red="0.90731960540000001" green="0.37726676460000003" blue="0.28036871549999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <imageReference key="selectedImage" image="arrow.down.right" catalog="system" symbolScale="default"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="Ubo-lA-Qmk"/>
                     <connections>
@@ -298,9 +300,10 @@
                             <constraint firstItem="tMN-1m-td3" firstAttribute="trailing" secondItem="GmA-Ni-sd0" secondAttribute="trailing" id="pyv-Aq-HEu"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="arrow.up.right" catalog="system" landscapeImage="dollarsign" badgeValue="Receitas" id="DEc-xU-ODc">
+                    <tabBarItem key="tabBarItem" title="" id="DEc-xU-ODc">
+                        <imageReference key="image" image="arrow.up.right" catalog="system" renderingMode="original"/>
                         <color key="badgeColor" red="0.47149503230000001" green="0.74011605979999995" blue="0.56422346830000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <imageReference key="selectedImage" image="arrow.up.right" catalog="system" symbolScale="default" variableValue="1"/>
+                        <imageReference key="selectedImage" image="arrow.up.right" catalog="system" symbolScale="default" variableValue="0.60000000000000009"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="nbJ-lb-RuN"/>
                     <connections>
@@ -436,12 +439,13 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Vie-1J-JfD">
             <objects>
-                <tabBarController id="F7m-Gr-h1e" sceneMemberID="viewController">
+                <tabBarController id="F7m-Gr-h1e" customClass="TabBarController" customModule="AccountManager" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="dLs-1B-9gM"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ipa-bz-TNn">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.37845173479999999" green="0.29139536620000001" blue="0.1949675679" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
                         <segue destination="Y6W-OH-hqX" kind="relationship" relationship="viewControllers" id="68v-tF-691"/>
@@ -459,12 +463,8 @@
     <resources>
         <image name="arrow.down.right" catalog="system" width="128" height="110"/>
         <image name="arrow.up.right" catalog="system" width="128" height="110"/>
-        <image name="dollarsign" catalog="system" width="89" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.2196078431372549" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

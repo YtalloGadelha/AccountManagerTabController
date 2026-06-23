@@ -15,6 +15,7 @@ class MainExpenseViewController: DefaultViewController{
     @IBOutlet weak var logoutButton: UIButton!
     
     var viewModel: MainExpenseViewModel = MainExpenseViewModel()
+    var tabBarTag: Bool = true
     
     func configLayout() {
         self.addExpenseButton.clipsToBounds = true
@@ -46,7 +47,23 @@ class MainExpenseViewController: DefaultViewController{
         self.showActivity()
         
         guard let tabBar = tabBarController?.tabBar else { return }
-        tabBar.tintColor = .systemRed
+
+        if #available(iOS 15, *) {
+            
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.backgroundColor = .white
+            tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.red]
+            tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.green]
+            tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .systemRed
+            tabBarAppearance.stackedLayoutAppearance.normal.iconColor = .systemGreen
+            
+            tabBar.standardAppearance = tabBarAppearance
+            tabBar.scrollEdgeAppearance = tabBarAppearance
+            
+        } else {
+            UITabBar().tintColor = .systemRed
+        }
+        
     }
     
     @IBAction func expenseAddButton(_ sender: Any) {

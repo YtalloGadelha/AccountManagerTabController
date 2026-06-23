@@ -15,6 +15,7 @@ class MainIncomeViewController: DefaultViewController{
     @IBOutlet weak var logoutButton: UIButton!
     
     var viewModel: MainIncomeViewModel = MainIncomeViewModel()
+    var tabBarTag: Bool = true
     
     func configLayout() {
         self.addIncomeButton.clipsToBounds = true
@@ -46,7 +47,22 @@ class MainIncomeViewController: DefaultViewController{
         self.showActivity()
         
         guard let tabBar = tabBarController?.tabBar else { return }
-        tabBar.tintColor = .systemGreen
+        
+        if #available(iOS 15, *) {
+            
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.backgroundColor = .white
+            tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.green]
+            tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
+            tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .systemGreen
+            tabBarAppearance.stackedLayoutAppearance.normal.iconColor = .systemRed
+            
+            tabBar.standardAppearance = tabBarAppearance
+            tabBar.scrollEdgeAppearance = tabBarAppearance
+            
+        } else {
+            UITabBar().tintColor = .systemGreen
+        }
         
     }
     
